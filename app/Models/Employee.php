@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\Hobby;
 
-class Employe extends Model
+class Employee extends Model
 {
     use HasFactory;
 

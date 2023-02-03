@@ -17,6 +17,6 @@ class Hobby extends Model
 
     protected function employee()
     {
-    	return $this->belongsTo(Employe::class,"employee_id");
+    	return $this->belongsTo(Employee::class,"employee_id");
     }
 }

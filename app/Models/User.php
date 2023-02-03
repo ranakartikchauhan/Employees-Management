@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Employe;
+use App\Models\Employee;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -45,11 +45,11 @@ class User extends Authenticatable
     ];
 
    public function employeedata(){
-        return $this->hasMany(Employe::class);
+        return $this->hasMany(Employee::class);
     }
 
     public function hobbies(){
-        return $this->hasManyThrough(related:Hobby::class,through:Employe::class);
+        return $this->hasManyThrough(related:Hobby::class,through:Employee::class);
     }
 
 
