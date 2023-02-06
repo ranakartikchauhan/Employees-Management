@@ -27,8 +27,9 @@ class EmployeFormRequest extends FormRequest
             'name' => ['required','string', 'max:255'],
             'email' => ['required','string', 'max:255'],
             'gender' => ['required','string', 'max:255'],
-            'status' => ['required','string', 'max:255'],
             'phone' => ['required','string', 'max:255'],
+            // 'hobbies' => ['required','string', 'max:255'],
+            
         ];
     }
 }

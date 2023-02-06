@@ -16,7 +16,6 @@ class Employee extends Model
         'name',
         'email',
         'gender',
-        'status',
         'phone',
         'user_id',
         'is_active'

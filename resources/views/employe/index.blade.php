@@ -10,7 +10,7 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Email</th>                        
+                        <th>Email</th>
                         <th>Gender</th>
                         <th>Status</th>
                         <th>Phone</th>

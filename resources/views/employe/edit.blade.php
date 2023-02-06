@@ -32,8 +32,8 @@
                     </div>
                     {{-- Active status  --}}
                     <p>User Status:</p>
-                    <input type="checkbox" id="status" name="status" value="1">
-                    <label for="status"> Is this user is active</label><br>
+                    <input type="checkbox" id="status" name="is_active" value="1">
+                    <label for="is_active"> Is this user is active</label><br>
                     <!-- Phone  -->
                     <div class="mt-4">
                         <x-input-label for="phone" :value="__('Phone No')" />
@@ -41,11 +41,16 @@
                             :value="$employe->phone" required />
                     </div>
                     {{-- Hobbies --}}
-                    <p>Please write two hobbies</p>
+                    <p>Please write hobbies</p>
                     <div>
-                        <x-text-input id="hobby_one" class="block mt-1 w-full" type="text" name="hobbies"
-                            :value="old('hobby_one')" autofocus />
-                        <x-input-error :messages="$errors->get('hobby_one')" class="mt-2" />
+                        <input type="checkbox" name="hobbies[]" value="Dancing">
+                        <label for="dancing"> Dancing</label><br>
+                        <input type="checkbox" name="hobbies[]" value="Playing">
+                        <label for="playing"> Playing</label><br>
+                        <input type="checkbox" name="hobbies[]" value="Studying" checked>
+                        <label for="studying">Studying</label>
+                        <x-input-error :messages="$errors->get('hobbies')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('hobbies')" class="mt-2" />
                     </div>
                     {{-- Update button  --}}
                     <div class="flex items-center$employe->id justify-end mt-4">
