@@ -4,13 +4,13 @@
         <x-success-status class="mb-4" :status="session('message')" />
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form method="POST" action="{{ url('employee/' . $employe->id) }}">
+                <form method="POST" action="{{ url('employees/' . $employee->id) }}">
                     @csrf
                     @method('PUT')
                     <!-- Name -->
                     <div>
                         <x-input-label for="name" :value="__('Name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$employe->name"
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$employee->name"
                             required autofocus />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
@@ -18,7 +18,7 @@
                     <div class="mt-4">
                         <x-input-label for="email" :value="__('Email')" />
                         <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
-                            :value="$employe->email" required />
+                            :value="$employee->email" required />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     {{-- Gender --}}
@@ -38,7 +38,7 @@
                     <div class="mt-4">
                         <x-input-label for="phone" :value="__('Phone No')" />
                         <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone"
-                            :value="$employe->phone" required />
+                            :value="$employee->phone" required />
                     </div>
                     {{-- Hobbies --}}
                     <p>Please write hobbies</p>
@@ -47,13 +47,13 @@
                         <label for="dancing"> Dancing</label><br>
                         <input type="checkbox" name="hobbies[]" value="Playing">
                         <label for="playing"> Playing</label><br>
-                        <input type="checkbox" name="hobbies[]" value="Studying" checked>
+                        <input type="checkbox" name="hobbies[]" value="Studying">
                         <label for="studying">Studying</label>
                         <x-input-error :messages="$errors->get('hobbies')" class="mt-2" />
                         <x-input-error :messages="$errors->get('hobbies')" class="mt-2" />
                     </div>
                     {{-- Update button  --}}
-                    <div class="flex items-center$employe->id justify-end mt-4">
+                    <div class="flex items-center$employee->id justify-end mt-4">
                         <x-primary-button
                             onclick="Swal.fire({
                             position: 'top-center',

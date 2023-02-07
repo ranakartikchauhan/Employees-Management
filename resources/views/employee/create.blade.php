@@ -4,10 +4,10 @@
         <x-success-status class="mb-4" :status="session('message')" />
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form method="POST" action="{{ url('employee') }}">
+                <form method="POST" action="{{ url('employees') }}">
                     @csrf
 
-
+                  
                     <!-- Name -->
                     <div>
                         <x-input-label for="name" :value="__('Name')" />
@@ -45,13 +45,13 @@
                         <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                     </div>
                     {{-- Hobbies --}}
-                    <p>Please Select your hobbies</p>
+                    <p>Please Select your  hobbies</p>
                     <div>
                         <input type="checkbox" name="hobbies[]" value="Dancing">
                         <label for="dancing"> Dancing</label><br>
                         <input type="checkbox" name="hobbies[]" value="Playing">
                         <label for="playing"> Playing</label><br>
-                        <input type="checkbox" name="hobbies[]" value="Studying" checked>
+                        <input type="checkbox" name="hobbies[]" value="Studying">
                         <label for="studying">Studying</label>
                         <x-input-error :messages="$errors->get('hobbies')" class="mt-2" />
                     </div>

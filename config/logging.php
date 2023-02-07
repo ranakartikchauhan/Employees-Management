@@ -58,11 +58,10 @@ return [
         ],
         'customlog' => [
             'driver' => 'single',
-            'path' => storage_path('logs/custom.log'), 
+            'path' => storage_path('logs/custom.log'),
             'level' => 'info',
-           
-        ],
 
+        ],
 
         'single' => [
             'driver' => 'single',

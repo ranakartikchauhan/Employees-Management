@@ -1,12 +1,16 @@
 @extends('layouts.app')
 @section('content')
+    <br>
+    <br>
     <h2>Employees Data</h2>
+    <br>
+    <br>
     <select id="user" class="form-select form-select-lg mb-3 user" aria-label=".form-select-lg example">
         @foreach ($data as $user)
             <option value="{{ $user->id }}">{{ $user->name }}</option>
         @endforeach
     </select>
-    <table class="table">
+    <table class="table border-primary table-info table-striped-rows table-bordered">
         <tbody>
             <thead>
                 <tr>
@@ -35,7 +39,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "{{ 'employee-list/' }}" + id,
+                url: "{{ 'employees-list/' }}" + id,
                 success: function(employeeData) {
                     function getName(arg) {
                         let names = "";

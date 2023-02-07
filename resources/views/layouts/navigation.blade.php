@@ -17,7 +17,7 @@
                     </x-nav-link>
 
                     {{-- For add user  --}}
-                    <x-nav-link :href="url('employee')" :active="request()->routeIs('employees')">
+                    <x-nav-link :href="url('employees-data')" :active="request()->routeIs('employees')">
                         {{ __('Employees') }}
                     </x-nav-link>
                 </div>

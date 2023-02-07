@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Models\Hobby;
 
 class Employee extends Model
 {
     use HasFactory;
 
     protected $table = 'employees';
+
     protected $fillable = [
         'name',
         'email',
         'gender',
         'phone',
         'user_id',
-        'is_active'
+        'is_active',
     ];
 
     // Mutator
@@ -27,15 +27,13 @@ class Employee extends Model
     //     $this->attributes['name'] = strtoupper($value);
     // }
 
-    // // accessor 
+    // // accessor
     // public function getEmailAttribute($value)
     // {
     //     return strtolower($value);
     // }
 
-
-
-    // Laravel 9 
+    // Laravel 9
     protected function Name(): Attribute
     {
         return Attribute::make(
@@ -52,13 +50,11 @@ class Employee extends Model
 
     public function user()
     {
-    	return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    function hobbies(){
-        return $this->hasMany(Hobby::class,"id");
+    public function hobbies()
+    {
+        return $this->hasMany(Hobby::class, 'id');
     }
-
-
-    
 }

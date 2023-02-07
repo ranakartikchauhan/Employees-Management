@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employe;
 use Faker\Factory as Facker;
 use Illuminate\Database\Seeder;
-use App\Models\Employe;
+
 class EmployeeSeeder extends Seeder
 {
     /**
@@ -14,30 +15,28 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
-
         $status = [
             'Active',
             'Inactive',
-            
+
         ];
         $gender = [
             'Male',
             'Female',
-            'Other'
-            
+            'Other',
+
         ];
         $user_id = [
             '1',
             '2',
             '3',
-            '4'
-            
+            '4',
+
         ];
         //
         $faker = Facker::create();
 
         for ($i = 0; $i <= 100; $i++) {
-
             $employe = Employe::create(
                 [
                     'name' => $faker->name,
@@ -49,6 +48,5 @@ class EmployeeSeeder extends Seeder
                 ]
             );
         }
-
     }
 }

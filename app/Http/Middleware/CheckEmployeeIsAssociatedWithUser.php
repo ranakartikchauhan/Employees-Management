@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckEditMiddleware
+class CheckEmployeeIsAssociatedWithUser
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,10 @@ class CheckEditMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        
-        return $next($request);
+        if (auth()->id() == $request->employee->user_id || auth()->user()->is_admin) {
+            return $next($request);
+        } else {
+            abort(403);
+        }
     }
 }

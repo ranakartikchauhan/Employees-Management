@@ -1,11 +1,12 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory as Facker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Faker\Factory as Facker;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -17,13 +18,12 @@ class UserSeeder extends Seeder
     {
         //
         $faker = Facker::create();
-        for($i=0;$i<=10;$i++){
+        for ($i = 0; $i <= 10; $i++) {
             User::create([
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => Hash::make($faker->password),
             ]);
         }
-       
     }
 }

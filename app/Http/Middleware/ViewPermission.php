@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class ViewPermission
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->is_admin) {
+        if (auth()->id() == $request->employee->user_id || auth()->user()->is_admin) {
             return $next($request);
         } else {
             abort(403);

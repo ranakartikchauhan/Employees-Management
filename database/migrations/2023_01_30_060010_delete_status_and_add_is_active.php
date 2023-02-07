@@ -15,10 +15,8 @@ return new class extends Migration
     {
         //
         Schema::table('employees', function (Blueprint $table) {
-         
             $table->dropColumn('status');
             $table->boolean('is_active')->default(null);
-         
         });
     }
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="py-12">
-        <a class="btn btn-primary" href="{{ url('employee/create') }}">Add User</a>
+        <a class="btn btn-primary" href="{{ url('employees/create') }}">Add User</a>
         <x-success-status class="mb-4" :status="session('message')" />
         <div class="container mt-5">
             <h2 class="mb-4">All Employees</h2>
@@ -63,8 +63,8 @@
                             name: 'id'
                         },
                         {
-                            data: 'hobbiescol',
-                            name: 'hobbiescol'
+                            data: 'hobbies',
+                            name: 'hobbies'
                         },
                         {
                             data: 'action',
@@ -73,11 +73,10 @@
                             searchable: true
                         },
                     ]
-                });
+                }); 
             });
             $('body').on('click', '.deleteEmployee', function() {
                 var id = $(this).data("id");
-                console.log(id);
                 Swal.fire({
                     title: 'Are you sure?',
                     text: 'You wont be able to revert this!',
@@ -93,10 +92,10 @@
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
-                            url: "/employee/" + id,
+                            url: "/employees/" + id,
                             type: 'DELETE',
                             success: function(result) {
-                                console.log("hello page work")
+                                'yajra-datatable'.reload();
                             },
                             error: function(data) {
                                 console.log('ERROR', data)
@@ -107,7 +106,7 @@
                             'Your file has been deleted.',
                             'success'
                         )
-                        'deleteEmployee'.reload();
+                        $('.yajra-datatable').DataTable().ajax.reload();
                     }
                 })
             })

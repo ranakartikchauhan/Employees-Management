@@ -16,11 +16,7 @@ return new class extends Migration
         //
         Schema::table('employees', function (Blueprint $table) {
             // $table->boolean('is_active')->default(null);
-           
-         
         });
-      
-       
     }
 
     /**
