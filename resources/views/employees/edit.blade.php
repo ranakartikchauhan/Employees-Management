@@ -4,7 +4,7 @@
         <x-success-status class="mb-4" :status="session('message')" />
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form method="POST" action="{{ url('employees/' . $employee->id) }}">
+                <form method="POST" action="{{route('employees.update',['employee' => $employee->id])}}">
                     @csrf
                     @method('PUT')
                     <!-- Name -->

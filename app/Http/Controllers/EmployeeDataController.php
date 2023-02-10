@@ -8,44 +8,38 @@ use Yajra\DataTables\DataTables;
 
 class EmployeeDataController extends Controller
 {
-    public function isAdmin(): bool
-    {
-        return auth()->user()->is_admin;
-    }
-
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $employees = $this->isAdmin()
-            ? Employee::get()
-            : auth()->user()->employees;
+        $employees = auth()->user()->is_admin
+        ? Employee::get()
+        : auth()->user()->employees;
 
-            return Datatables::of($employees)
-                ->addIndexColumn()
-                ->addColumn('hobbies', function ($row) {
-                    $hobbies = '' . $row->hobbies[0]->hobbies . '';
+        return Datatables::of($employees)
+            ->addIndexColumn()
+            ->addColumn('hobbies', function ($employee) {
+                $hobby = $employee['hobbies'];
+                $hobbies = array();
+                foreach ($hobby as $x => $x_value) {
+                    array_push($hobbies, ($x_value->hobbies));
+                }
 
-                    return $hobbies;
-                })
-                ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="employees/' . $row->id . '/edit" class=" btn btn-success btn-sm">Edit</a>
-                    <button data-id="' . $row->id . '" class="delete btn btn-danger btn-sm deleteEmployee" >Delete</button>';
+                return $hobbies;
+            })
 
-                    return $actionBtn;
-                })
-                ->editColumn('is_active', function ($data) {
-                    return ($data->is_active == '1') ? 'Active' : 'Inactive';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+            ->addColumn('action', function ($row) {
 
-        return view('employee.index');
-    }
+                $actionBtn = '
+                <a  href="employees/' . $row->id . '" class="btn btn-primary btn-sm">Show</a>
+                <a href="employees/' . $row->id . '/edit" class=" btn btn-success btn-sm">Edit</a>
+                <button data-id="' . $row->id . '" class="delete btn btn-danger btn-sm deleteEmployee" >Delete</button>';
 
-    public function getData($id)
-    {
-        $data = Employee::where('user_id', $id)->get();
-        return $data;
+                return $actionBtn;
+            })
+            ->editColumn('is_active', function ($data) {
+                return ($data->is_active == '1') ? 'Active' : 'Inactive';
+            })
+            ->rawColumns(['action', 'viewBtn', 'hobbies'])
+            ->make(true);
+            
     }
 }

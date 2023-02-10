@@ -47,9 +47,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Employee::class);
     }
-
-     public function hobbies()
-     {
-         return $this->hasManyThrough(related:Hobby::class, through:Employee::class);
-     }
 }

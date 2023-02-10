@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
-
+    public $incrementing = true;
     protected $table = 'employees';
 
     protected $fillable = [
@@ -55,6 +55,6 @@ class Employee extends Model
 
     public function hobbies()
     {
-        return $this->hasMany(Hobby::class, 'id');
+        return $this->hasMany(Hobby::class);
     }
 }

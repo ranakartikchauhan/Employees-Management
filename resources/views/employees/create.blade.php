@@ -4,10 +4,8 @@
         <x-success-status class="mb-4" :status="session('message')" />
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form method="POST" action="{{ url('employees') }}">
+                <form method="POST" action="{{ route('employees.store') }}">
                     @csrf
-
-                  
                     <!-- Name -->
                     <div>
                         <x-input-label for="name" :value="__('Name')" />
@@ -45,7 +43,7 @@
                         <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                     </div>
                     {{-- Hobbies --}}
-                    <p>Please Select your  hobbies</p>
+                    <p>Please Select your hobbies</p>
                     <div>
                         <input type="checkbox" name="hobbies[]" value="Dancing">
                         <label for="dancing"> Dancing</label><br>
@@ -64,4 +62,31 @@
             </div>
         </div>
     </div>
+    <script>
+        let list = [
+            'reading',
+            'writing',
+            'playing'
+        ];
+
+        // [
+        //     'hobbies' => 'reading',
+        //     'hobbies' => 'writing',
+        //     'hobbies' => 'playing',
+
+        // ]
+
+        let list2 = [];
+      
+        list2 = list.map((i) => {
+            list.push(i)
+            const propertyNames = Object.keys(list);
+            return {hobbies:i};
+        })
+       
+
+
+        console.log(list);
+        console.log(list2);
+    </script>
 @endsection

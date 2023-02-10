@@ -23,5 +23,4 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 Route::resource('/employees', EmployeeController::class);
 
-Route::get('employees-data', [EmployeeDataController::class, 'index'])->name('get.table.data');
-Route::middleware('admin')->get('employees-list/{id}', [EmployeeDataController::class, 'getData']);
+Route::post('employees-data', [EmployeeDataController::class, 'index'])->name('get.table.data');

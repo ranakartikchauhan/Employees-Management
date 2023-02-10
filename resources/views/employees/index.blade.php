@@ -1,10 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <div class="py-12">
-        <a class="btn btn-primary" href="{{ url('employees/create') }}">Add User</a>
+
+
+        <input type="text" class="float-right me-3" id="custom-search-for-datatables" class="form-control" placeholder="Search here">
+
+        <a class="btn btn-primary float-right me-5" href="{{ route('employees.create') }}">Add User</a>
         <x-success-status class="mb-4" :status="session('message')" />
         <div class="container mt-5">
-            <h2 class="mb-4">All Employees</h2>
             <table class="table table-bordered yajra-datatable">
                 <thead>
                     <tr>
@@ -16,7 +19,7 @@
                         <th>Phone</th>
                         <th>ID</th>
                         <th>Hobbies</th>
-                        <th>Edit/Delete</th>
+                        <th>View/Edit/Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +34,17 @@
         <script type="text/javascript">
             $(function() {
                 var table = $('.yajra-datatable').DataTable({
+                    
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('get.table.data') }}",
+                    sDom: '<"top"i>rt<"bottom"i><"clear">',
+                    ajax: {
+                        'url': '{{ route('get.table.data') }}',
+                        'type': 'POST',
+                        'headers': {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    },
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex'
@@ -65,6 +76,7 @@
                         {
                             data: 'hobbies',
                             name: 'hobbies'
+
                         },
                         {
                             data: 'action',
@@ -73,7 +85,14 @@
                             searchable: true
                         },
                     ]
-                }); 
+                });
+            });
+
+            $('#custom-search-for-datatables').on('change', function() {
+                var table = $('.yajra-datatable').DataTable(); // get all visible DT instances
+
+                table.search( this.value ).draw();
+
             });
             $('body').on('click', '.deleteEmployee', function() {
                 var id = $(this).data("id");
