@@ -61,32 +61,5 @@
                 </form>
             </div>
         </div>
-    </div>
-    <script>
-        let list = [
-            'reading',
-            'writing',
-            'playing'
-        ];
-
-        // [
-        //     'hobbies' => 'reading',
-        //     'hobbies' => 'writing',
-        //     'hobbies' => 'playing',
-
-        // ]
-
-        let list2 = [];
-      
-        list2 = list.map((i) => {
-            list.push(i)
-            const propertyNames = Object.keys(list);
-            return {hobbies:i};
-        })
-       
-
-
-        console.log(list);
-        console.log(list2);
-    </script>
+    </div> 
 @endsection

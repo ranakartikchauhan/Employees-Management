@@ -16,9 +16,10 @@ class EmployeeDataController extends Controller
 
         return Datatables::of($employees)
             ->addIndexColumn()
+
             ->addColumn('hobbies', function ($employee) {
                 $hobby = $employee['hobbies'];
-                $hobbies = array();
+                $hobbies = [];
                 foreach ($hobby as $x => $x_value) {
                     array_push($hobbies, ($x_value->hobbies));
                 }
@@ -27,11 +28,10 @@ class EmployeeDataController extends Controller
             })
 
             ->addColumn('action', function ($row) {
-
                 $actionBtn = '
-                <a  href="employees/' . $row->id . '" class="btn btn-primary btn-sm">Show</a>
-                <a href="employees/' . $row->id . '/edit" class=" btn btn-success btn-sm">Edit</a>
-                <button data-id="' . $row->id . '" class="delete btn btn-danger btn-sm deleteEmployee" >Delete</button>';
+                <a  href="employees/'.$row->id.'" class="btn btn-primary btn-sm">Show</a>
+                <a href="employees/'.$row->id.'/edit" class=" btn btn-success btn-sm">Edit</a>
+                <button data-id="'.$row->id.'" class="delete btn btn-danger btn-sm deleteEmployee" >Delete</button>';
 
                 return $actionBtn;
             })
@@ -40,6 +40,12 @@ class EmployeeDataController extends Controller
             })
             ->rawColumns(['action', 'viewBtn', 'hobbies'])
             ->make(true);
-            
+    }
+
+    public function getData($id)
+    {
+        $data = Employee::where('user_id', $id)->get();
+
+        return $data;
     }
 }

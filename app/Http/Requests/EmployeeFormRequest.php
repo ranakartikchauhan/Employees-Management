@@ -24,7 +24,7 @@ class EmployeeFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255','alpha:ascii',],
             'email' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],

@@ -32,14 +32,14 @@ class EmployeeController extends Controller
     public function store(EmployeeFormRequest $request)
     {
         $hobby = $request['hobbies'];
-        $hobbies=array();
-        for($i=0;$i<sizeof($hobby);$i++){
-
-            $ans=array('hobbies'=>$hobby[$i]);
-            array_push($hobbies,$ans);
-        }   
+        $hobbies = [];
+        for ($i = 0; $i < count($hobby); $i++) {
+            $employeeHobbies = ['hobbies' => $hobby[$i]];
+            array_push($hobbies, $employeeHobbies);
+        }
         $employee = auth()->user()->employees()->create($request->all());
         $employee->hobbies()->createMany($hobbies);
+
         return redirect('employees')->with('message', 'Employee Added Successfully');
     }
 
@@ -50,16 +50,33 @@ class EmployeeController extends Controller
 
     public function update(EmployeeFormRequest $request, Employee $employee)
     {
-        $employee->update($request->except(['_token', '_method', 'hobbies']));
-        $hobbies = implode(',', $request['hobbies']);
-        $employee->hobbies()->update(['hobbies' => $hobbies]);
-        return redirect('employees-data')->with('message', 'Employee updated Successfully');
+        // $employee->update($request->except(['_token', '_method', 'hobbies']));
+        $hobby = $request['hobbies'];
+        $hobbies = [];
+        $a=[];
+        $b=[];
+        $dbHobbies = $employee->hobbies()->get(['hobbies']);
+        
+        for($i=0;$i<count($hobby);$i++){
+            array_push($a,$hobby[$i]);
+        }
+        for($i=0;$i<count($dbHobbies);$i++){
+            array_push($b,$dbHobbies->toArray()[$i]['hobbies']);
+        }
+
+        $diffHobbies=array_diff($a,$b);   
+        foreach($diffHobbies as $diffHobby){
+                  $employeeHobbies = ['hobbies' => $diffHobby];
+            array_push($hobbies, $employeeHobbies);
+        }
+        $employee->hobbies()->createMany($hobbies);
+        return redirect('employees')->with('message', 'Employee updated Successfully');
     }
 
     public function destroy(Employee $employee)
     {
         $employee->delete();
+
         return redirect('employees')->with('message', 'Employee Deleted Successfully');
     }
-
 }
