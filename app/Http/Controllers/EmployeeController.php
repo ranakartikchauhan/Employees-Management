@@ -53,23 +53,24 @@ class EmployeeController extends Controller
         // $employee->update($request->except(['_token', '_method', 'hobbies']));
         $hobby = $request['hobbies'];
         $hobbies = [];
-        $a=[];
-        $b=[];
+        $tempA = [];
+        $tempB = [];
         $dbHobbies = $employee->hobbies()->get(['hobbies']);
-        
-        for($i=0;$i<count($hobby);$i++){
-            array_push($a,$hobby[$i]);
+
+        for ($i = 0; $i < count($hobby); $i++) {
+            array_push($tempA, $hobby[$i]);
         }
-        for($i=0;$i<count($dbHobbies);$i++){
-            array_push($b,$dbHobbies->toArray()[$i]['hobbies']);
+        for ($i = 0; $i < count($dbHobbies); $i++) {
+            array_push($tempB, $dbHobbies->toArray()[$i]['hobbies']);
         }
 
-        $diffHobbies=array_diff($a,$b);   
-        foreach($diffHobbies as $diffHobby){
-                  $employeeHobbies = ['hobbies' => $diffHobby];
+        $diffHobbies = array_diff($tempA, $tempB);
+        foreach ($diffHobbies as $diffHobby) {
+            $employeeHobbies = ['hobbies' => $diffHobby];
             array_push($hobbies, $employeeHobbies);
         }
         $employee->hobbies()->createMany($hobbies);
+
         return redirect('employees')->with('message', 'Employee updated Successfully');
     }
 
