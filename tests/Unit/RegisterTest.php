@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\Unit;
+
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -14,13 +15,15 @@ class RegisterTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
     public function test_register_page_exist()
     {
         $response = $this->get('/register');
         $response->assertStatus(200);
     }
 
-    public function test_all_registration(){
+    public function test_all_registration()
+    {
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'testi@example.com',
@@ -31,7 +34,8 @@ class RegisterTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_name_field(){
+    public function test_name_field()
+    {
         $response = $this->post('/register', [
             'name' => '1234',
             'email' => 'testi@example.com',
