@@ -50,13 +50,12 @@ class EmployeeController extends Controller
 
     public function update(EmployeeFormRequest $request, Employee $employee)
     {
-        // $employee->update($request->except(['_token', '_method', 'hobbies']));
+        $employee->update($request->except(['_token', '_method', 'hobbies']));
         $hobby = $request['hobbies'];
         $hobbies = [];
         $tempA = [];
         $tempB = [];
         $dbHobbies = $employee->hobbies()->get(['hobbies']);
-
         for ($i = 0; $i < count($hobby); $i++) {
             array_push($tempA, $hobby[$i]);
         }

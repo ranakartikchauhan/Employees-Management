@@ -22,7 +22,7 @@
                             <div class="mb-3">
                                 <label for="oldPasswordInput" class="form-label">Old Password</label>
                                 <input name="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" id="oldPasswordInput"
-                                    placeholder="Old Password">
+                                    placeholder="Old Password" autocomplete="new-password">
                                 @error('old_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

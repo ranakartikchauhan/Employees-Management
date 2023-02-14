@@ -1,19 +1,17 @@
 @extends('layouts.app')
 @section('content')
-    <br>
-    <br>
-    <h2>Employees Data</h2>
-    <br>
-    <br>
+    <div class="container text-center px-20 pt-6">
+
     <select id="user" class="form-select form-select-lg mb-3 user" aria-label=".form-select-lg example">
+        <option  selected> Please Select a User </option>
         @foreach ($data as $user)
             <option value="{{ $user->id }}">{{ $user->name }}</option>
         @endforeach
     </select>
-    <table class="table border-primary table-info table-striped-rows table-bordered">
+    <table class="table table-danger">
         <tbody>
             <thead>
-                <tr>
+                <tr class="table-dark">
                     <td>Name</td>
                     <td>Email</td>
                 </tr>
@@ -21,6 +19,10 @@
             <tr>
                 <td id="employee_name"></td>
                 <td id="employee_email"></td>
+            </tr>
+            <tr id="no_records">
+                <td>No Records Found</td>
+                <td></td>
             </tr>
         </tbody>
         {{--  // This line is for make a another dropdown for employyes email --}}
@@ -30,6 +32,7 @@
                  
                   </select> --}}
     </table>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script type="text/javascript">
@@ -48,6 +51,7 @@
                         }
                         return names;
                     }
+
                     function getMail(arg) {
                         let emails = "";
                         for (let i = 0; i < arg.length; i++) {
@@ -60,14 +64,10 @@
                         return emails;
                     }
                     if (employeeData) {
+                        $("#no_records").hide();
                         $("#employee_name").html(`<ol> ${getName(employeeData)}</ol>`);
                         $("#employee_email").html(`<ol> ${getMail(employeeData)}</ol>`);
-                        // using javascript
-                        // document.querySelector("#employee_name").innerHTML=`<ol> ${getName(employeeData)}</ol>`;
-                        // document.querySelector("#employee_email").innerHTML=`<ol> ${getMail(employeeData)}</ol>`
-                    } else {
-                        $("#employee_name").html(`<ol>No Records</ol>`);
-                    }
+                    } 
                 }
             })
         });

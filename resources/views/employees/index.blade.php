@@ -19,7 +19,7 @@
                         <th>Phone</th>
                         <th>ID</th>
                         <th>Hobbies</th>
-                        <th>View/Edit/Delete</th>
+                        <th>View /Edit/Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,9 +88,8 @@
                 });
             });
 
-            $('#custom-search-for-datatables').on('change', function() {
+            $('#custom-search-for-datatables').on('keypress', function() {
                 var table = $('.yajra-datatable').DataTable(); // get all visible DT instances
-
                 table.search( this.value ).draw();
 
             });

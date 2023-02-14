@@ -24,11 +24,11 @@ class EmployeeFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'alpha:ascii'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[\pL\s\-]+$/u'],
             'email' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:255'],
-            // 'hobbies' => ['required','string', 'max:255'],
+            'phone' => ['required', 'numeric', 'digits:10'],
+            'hobbies' => ['required'],
 
         ];
     }
