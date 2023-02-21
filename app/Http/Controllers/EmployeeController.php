@@ -31,6 +31,7 @@ class EmployeeController extends Controller
 
     public function store(EmployeeFormRequest $request)
     {
+        // dd($request);
         $hobby = $request['hobbies'];
         $hobbies = [];
         for ($i = 0; $i < count($hobby); $i++) {

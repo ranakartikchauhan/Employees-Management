@@ -1,20 +1,19 @@
 <?php
 namespace Tests\Browser;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * A basic functional test example.
      *
      * @return void
      */
 
-    public function testRegisterPage()
+    public function registerUser()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
@@ -31,7 +30,7 @@ class LoginTest extends DuskTestCase
 
 
 
-    public function testLoginPage()
+    public function loginUser()
     {
         $this->browse(function (Browser $browser) {
 
@@ -45,9 +44,12 @@ class LoginTest extends DuskTestCase
             ->assertSee('User Employees');
         });
     }
+
+
     public function testLoginPageEnterKey()
     {
         $this->browse(function (Browser $browser) {
+            $this->registerUser();
             $browser->visit('/employees')
             ->logout()
             ->visit('login')
@@ -58,26 +60,5 @@ class LoginTest extends DuskTestCase
             ->assertSee('User Employees');
         });
     }
-
-
-    public function testEmployeePageNotAccessByUnauthenticatedUser()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/employees')
-            ->logout()
-            ->visit('/employees')
-            ->assertSee('LOG IN');
-
-        });
-    }
-
- 
-   
-
-    
-
-
-    
-
 
 }

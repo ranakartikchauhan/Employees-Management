@@ -5,14 +5,13 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 class EmployeesPageTest extends DuskTestCase
 {
+    use DatabaseMigrations;
     /**
      * A Dusk test example.
      */
-    use RefreshDatabase;
-     public function testRegisterPage()
+    public function registerUser()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
@@ -28,10 +27,11 @@ class EmployeesPageTest extends DuskTestCase
     }
 
 
-    public function testLoginPage()
+    public function loginUser()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('employees')
+
+            $browser->visit('/employees')
             ->logout()
             ->visit('login')
             ->type('email','abc@gmail.com')
@@ -41,34 +41,29 @@ class EmployeesPageTest extends DuskTestCase
             ->assertSee('User Employees');
         });
     }
-    
-    // public function testCreateEmployeePage()
-    // {
-    //     $this->testLoginPage();
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/employees')
-    //             ->assertSee('User Employees')
-    //             ->visit('employees/create')
-    //             ->assertSee('Create Employee')
-    //             ->type('name','hello')
-    //             ->type('email','hello@gmail.com')
-    //             ->select('gender') 
-    //             ->check('status')
-    //             ->type('phone','1234567890')
-    //             ->check('hobbies[]')
-    //             ->press('ADD')
-    //             ->visit('employees')
-    //             ->assertSee("hello");
-    //     });
-    // }
 
  
-    // public function testEmployeeShowPageAccessByAuthenticatedUser()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $browser->visit('/employees/1')
-    //         ->assertSee('hello');
-    //         ;
-    //     });
-    // }
+    public function testEmployeeShowPageAccessByAuthenticatedUser()
+    {   $this->loginUser();
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/employees/1')
+            ->assertSee('hello');
+            ;
+        });
+    }
+
+
+    public function testEmployeePageNotAccessByUnauthenticatedUser()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/employees')
+            ->logout()
+            ->visit('/employees')
+            ->assertSee('LOG IN');
+
+        });
+    }
+
+
+    
 }

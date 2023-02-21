@@ -1,16 +1,13 @@
 <?php
 
 namespace Tests\Browser;
-
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RegisterTest extends DuskTestCase
 {
-    use RefreshDatabase;
+   use DataBaseMigrations;
     
     /**
      * A Dusk test example.
