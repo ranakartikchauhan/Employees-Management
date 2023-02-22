@@ -1,14 +1,15 @@
 <?php
 
 namespace Tests\Browser;
+
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RegisterTest extends DuskTestCase
 {
-   use DataBaseMigrations;
-    
+    use DataBaseMigrations;
+
     /**
      * A Dusk test example.
      */
@@ -16,15 +17,14 @@ class RegisterTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
-                    ->assertSee('register')
-                    ->type('name','kartik')
-                    ->type('email','abc@gmail.com')
-                    ->type('password','Aa@12345')
-                    ->type('password_confirmation','Aa@12345')
+                    ->assertSee('Register User')
+                    ->type('name', 'kartik')
+                    ->type('email', 'abc@gmail.com')
+                    ->type('password', 'Aa@12345')
+                    ->type('password_confirmation', 'Aa@12345')
                     ->press('register')
                     ->assertPathIs('/employees')
                     ->assertSee('User Employees');
         });
     }
-
 }

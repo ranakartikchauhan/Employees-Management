@@ -55,7 +55,7 @@
                         <x-input-error :messages="$errors->get('hobbies')" class="mt-2" />
                     </div>
                     <div class="flex items-center justify-end mt-4">
-                        <x-primary-button class="ml-4">
+                        <x-primary-button  name='add' class="ml-4">
                             {{ __('Add') }}
                         </x-primary-button>
                     </div>

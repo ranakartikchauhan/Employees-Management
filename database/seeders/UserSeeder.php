@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Faker\Factory as Facker;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -19,11 +18,7 @@ class UserSeeder extends Seeder
         //
         $faker = Facker::create();
         for ($i = 0; $i <= 10; $i++) {
-            User::create([
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => Hash::make($faker->password),
-            ]);
+            $user = User::Factory()->count(1)->create();
         }
     }
 }

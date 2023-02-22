@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+
 use Faker\Factory as Facker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,12 +22,12 @@ class EmployeeFactory extends Factory
         return [
             //
 
-            'name' => $faker->name,
+            'name' => 'user',
             'email' => $faker->unique()->safeEmail,
-            'gender'=>$faker->randomElement(['Male', 'Female']),
-            'is_active'=>$faker->randomElement([0,1]),
-            'phone'=>$faker->phoneNumber,
-            'user_id'=>\App\Models\User::factory()->create()->id,
+            'gender' => $faker->randomElement(['Male', 'Female']),
+            'is_active' => $faker->randomElement([0, 1]),
+            'phone' => '1234567890',
+            'user_id' => \App\Models\User::factory()->create()->id,
         ];
     }
 }
