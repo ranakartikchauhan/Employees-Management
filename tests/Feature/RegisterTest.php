@@ -2,10 +2,14 @@
 
 namespace Tests\Unit;
 
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic unit test example.
      *
@@ -124,11 +128,16 @@ class RegisterTest extends TestCase
 
     public function test_user_cant_register_with_same_email_which_already_exist()
     {
-        $response = $this->post('/register', [
-            'name' => 'abc',
-            'email' => 'abc@gmail.com',
-            'password' => 'Aa@#1234',
-            'password_confirmation' => 'Aa@#1234',
+        $user = User::Factory()->create();
+        $response = $this->actingAs($user)->post('/register');
+        $response->assertStatus(302);
+        $response->assertRedirect('/employees');
+        $response = $this->post('/logout');
+
+        $response = $this->post('/register', ['name' => 'absb', 'email' => $user->email, 'password' => 'Aa@12345', 'password_confirmation' => 'Aa@12345']);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors([
+            'email' => 'The email has already been taken.',
         ]);
         $response->assertRedirect('/');
     }

@@ -4,7 +4,7 @@
 
         <h3>User Employees</h3>
 
-        <input type="text" class="float-right me-3" id="custom-search-for-datatables" class="form-control" placeholder="Search here">
+        <input type="text" name="search-input" class="float-right me-3" id="custom-search-for-datatables" class="form-control" placeholder="Search here">
 
         <a class="btn btn-primary float-right me-5" href="{{ route('employees.create') }}">Add User</a>
         <x-success-status class="mb-4" :status="session('message')" />

@@ -27,3 +27,8 @@ Route::post('employees-data', [EmployeeDataController::class, 'index'])->name('g
 Route::middleware('admin')->get('employees-list/{id}', [EmployeeDataController::class, 'getData']);
 Route::get('change-password', [ChangePasswordController::class, 'changePassword'])->middleware(['auth'])->name('change.password');
 Route::post('change-password', [ChangePasswordController::class, 'updatePassword'])->middleware(['auth'])->name('update-password');
+
+Route::get('/test',function(){
+        // dd(User::find(9)->employees->toArray());
+        return User::find(9)->employees[1]->hobbies;
+});
